@@ -1675,7 +1675,7 @@ MonoBehaviour:
       bodyRenderer: {fileID: 0}
       expressionRenderer: {fileID: 0}
   moveTarget: {x: 1, y: 0}
-  moveSpeed: 15
+  moveSpeed: 5
   smooth: 1
 --- !u!4 &1471702565
 Transform:
