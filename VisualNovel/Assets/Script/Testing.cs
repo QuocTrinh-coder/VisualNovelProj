@@ -11,6 +11,18 @@ public class Testing : MonoBehaviour
         Audrey = CharacterManager.instance.getCharacter("Audrey");
     }
 
+    public Vector2 moveTarget;
+    public float moveSpeed;
+    public bool smooth;
+
+    void Update()
+    {
+        if ( Input.GetKey(KeyCode.M))
+        {
+            Audrey.MoveTo (moveTarget, moveSpeed, smooth ) ;
+        }
+    }
+
     // get the text for character speak and the counting variable for the line
     
     // public string[] speech;
