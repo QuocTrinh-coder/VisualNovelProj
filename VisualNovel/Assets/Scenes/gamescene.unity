@@ -449,7 +449,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: New Text
+  m_Text: Audrey
 --- !u!222 &218465494
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1675,7 +1675,7 @@ MonoBehaviour:
       bodyRenderer: {fileID: 0}
       expressionRenderer: {fileID: 0}
   moveTarget: {x: 0.8, y: 0.19}
-  moveSpeed: 1
+  moveSpeed: 0.3
   smooth: 1
 --- !u!4 &1471702565
 Transform:
@@ -2057,7 +2057,11 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hi Alex, you look tired today. Did something happened
+  m_Text: 'I placed my thumb and forefinger on the icy flesh, spreading it taunt
+    above the breastbone as Uncle had showed me. Getting the preliminary incision
+    correct was imperative.
+
+'
 --- !u!222 &1850710731
 CanvasRenderer:
   m_ObjectHideFlags: 0
