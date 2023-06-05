@@ -127,6 +127,7 @@ using UnityEngine.UI;
 
 
     // control our character movement
+    // the loop below is the movement control for the character
     float speed; // Variable for controlling the movement speed
     bool smooth; // Variable for determining whether to use smooth movement
     IEnumerator Moving(Vector2 Target, float speed, bool smooth = true) // smooth movement use looping to accelerate and decelerate character

@@ -943,7 +943,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 32c664fc9c9c2314c999c3cfd1b4fc66, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0d2f3f79bbd864469599089f7f4b987, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1674,8 +1674,8 @@ MonoBehaviour:
       singleLayerImage: {fileID: 0}
       bodyRenderer: {fileID: 0}
       expressionRenderer: {fileID: 0}
-  moveTarget: {x: 1, y: 0}
-  moveSpeed: 5
+  moveTarget: {x: 0.8, y: 0.19}
+  moveSpeed: 1
   smooth: 1
 --- !u!4 &1471702565
 Transform:
