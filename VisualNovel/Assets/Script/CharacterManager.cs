@@ -58,10 +58,38 @@ public class CharacterManager : MonoBehaviour
         // The newly created Character object is added to the characters list.
         characters.Add (newCharacter);
 
-        // the new Character object is returned.
+        // /the new Character object is returned.
         return newCharacter;
 
         // This function allows you to create a new Character object with the given name, update the dictionary and list accordingly, and return the newly created object.
+    }
+
+Vector2 targetPosition;
+    Coroutine moving;
+    bool isMoving { get { return moving != null; } }
+
+    public void Move(Vector2 target, float speed, bool smooth = true)
+    {
+        StopMoving();
+        moving = StartCoroutine(Moving(target, speed, smooth));
+    }
+
+    public void StopMoving()
+    {
+        if (isMoving)
+        {
+            StopCoroutine(moving);
+        }
+        moving = null;
+    }
+
+    IEnumerator Moving(Vector2 target, float speed, bool smooth = true)
+    {
+        targetPosition = target;
+        // Implement the logic for character movement here
+        // You can access the targetPosition and use it for movement calculations
+
+        yield return null; // Placeholder yield statement
     }
 }
 

@@ -21,6 +21,10 @@ using UnityEngine.UI;
     // If singleLayerImage is not null, it means the character is a multi-layer character, and the property returns false.
     public bool isMultiLayerCharacter{get{ return renderers.singleLayerImage == null;}}
 
+    // this is the space between the anchor of this character. Defines how much space the character take up on the canvas
+    public Vector2 anchorPadding { get {return root.anchorMax - root.anchorMin;}}
+
+
     // turn chracter on and off depend on if they are speaking or not ( continue in the video from 25:54 character management video)
     // public bool enabled { get {return root.gameObject.activeInHierarchy;} set {root.gameObject.SetActive(value);}}
 
@@ -80,6 +84,76 @@ using UnityEngine.UI;
     }
     // An instance of the Renderers class is created as the renderers variable of the Character class.
     public Renderers renderers = new Renderers();
+
+    Vector2 targetPosition;
+    Coroutine moving; // movement move through here
+    bool isMoving{ get { return moving != null; }}
+
+    public void Move(Vector2 Target, float speed, bool smooth = true)
+    {
+        // if we are moving, stop moving 
+        StopMoving();
+        // start moving coroutine
+        moving = CharacterManager.instance.StartCoroutine(Moving(Target, speed, smooth));
+    }
+
+    public void StopMoving( bool arriveAtTargetPositionImmidiately = false) {
+        if (isMoving)
+        {
+            CharacterManager.instance.StopCoroutine(moving);
+            if (arriveAtTargetPositionImmidiately ){
+                setPosition (targetPosition);
+            }
+        }
+        moving = null ;
+    }
+
+
+// immidiately set the position of this character to the intended target
+    public void setPosition(Vector2 target){
+        // now we want to get the padding between the achors of this character so we know what their so we know what are the min and max position are
+        Vector2 padding = anchorPadding;
+
+        // now get the limitations for 0 to 100% movement
+        // the farthest a character can move to the right before reaching 100% should be the 1 value to mulitple our target by
+        float maxX = 1f - padding.x;
+        float maxY = 1f - padding.y;
+
+        // now get the actual position target for the minimum anchors ( left/bottom bounds) of the character. because MaxX and maxY is just a percentage 
+        Vector2 minAnchorTarget = new Vector2(maxX * targetPosition.x, maxY - targetPosition.y);
+        root.anchorMin = minAnchorTarget;
+        root.anchorMax = root.anchorMin + padding;
+    }
+
+
+    // control our character movement
+    // the loop below is the movement control for the character
+    float speed; // Variable for controlling the movement speed
+    bool smooth; // Variable for determining whether to use smooth movement
+    IEnumerator Moving(Vector2 Target, float speed, bool smooth = true) // smooth movement use looping to accelerate and decelerate character
+    {
+        targetPosition = Target;
+        // now we want to get the padding between the achors of this character so we know what their so we know what are the min and max position are
+        Vector2 padding = anchorPadding;
+
+        // now get the limitations for 0 to 100% movement
+        // the farthest a character can move to the right before reaching 100% should be the 1 value to mulitple our target by
+        float maxX = 1f - padding.x;
+        float maxY = 1f - padding.y;
+
+        // now get the actual position target for the minimum anchors ( left/bottom bounds) of the character. because MaxX and maxY is just a percentage 
+        Vector2 minAnchorTarget = new Vector2(maxX * targetPosition.x, maxY - targetPosition.y);
+
+        // this is the loop to make the smooth transition. Move until we reach the target position
+        speed *= Time.deltaTime;
+        while (root.anchorMin != minAnchorTarget){
+            root.anchorMin = (!smooth) ? Vector2.MoveTowards(root.anchorMin, minAnchorTarget, speed) : Vector2.Lerp(root.anchorMin, minAnchorTarget, speed);
+            root.anchorMax = root.anchorMin + padding;
+            yield return new WaitForEndOfFrame ();
+        }
+
+        StopMoving();
+    }
 }
 
 // Summary

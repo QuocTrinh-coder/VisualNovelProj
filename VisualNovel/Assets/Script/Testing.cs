@@ -5,11 +5,29 @@ using UnityEngine;
 public class Testing : MonoBehaviour
 {
     public Character Audrey; 
+    public Vector2 moveTarget;
+    public float moveSpeed;
+    public bool smooth;
     // Start is called before the first frame update
     void Start()
     {
         Audrey = CharacterManager.instance.getCharacter("Audrey");
+        Audrey.Move (moveTarget, moveSpeed, smooth ) ;
     }
+
+
+
+    // void Update()
+    // {
+    //     if ( Input.GetKey(KeyCode.M))
+    //     {
+    //         Audrey.Move (moveTarget, moveSpeed, smooth ) ;
+    //     }
+    //     if (Input.GetKey(KeyCode.S))
+    //     {
+    //         Audrey.StopMoving (true) ;
+    //     }
+    // }
 
     // get the text for character speak and the counting variable for the line
     
